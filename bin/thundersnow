@@ -8,6 +8,7 @@ if ARGV.size == 0
   puts 'Get weather for a zipcode: thundersnow 05401'
   puts 'Get weather for a city, state: thundersnow "burlington, vt"'
   puts 'Get forecast for a location: thundersnow 05401 --forecast'
+  puts 'Get forecast in Celsius thundersnow 05401 --forecasteu'
 else
   thundersnow = Thundersnow::Bin.new ARGV
   output = thundersnow.run

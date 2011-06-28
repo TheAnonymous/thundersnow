@@ -39,6 +39,19 @@ module Thundersnow
       values.join("\n")
     end
 
+    def forecasteu
+      values = ["Weather Forecast for #{city}"]
+
+      @xml.xpath('//forecast_conditions').each do |day|
+        values << "Forecast for #{day_of_week(day)}"
+        values << "High: #{((read_attr(day, 'high').to_f() -32) *5/9).to_s.slice!(0,4)+deg_symbol}C / Low: #{((read_attr(day, 'low').to_f() -32) *5/9).to_s.slice!(0,4)+deg_symbol}C"
+        values << "Conditions: #{read_attr(day, 'condition')}"
+        values << "-------------------------"
+      end
+
+      values.join("\n")
+    end
+
     def city
       @city ||= read_attr(@xml, '//forecast_information/city')
     end
@@ -57,7 +70,7 @@ module Thundersnow
     def temperatures
       "#{temp_f} #{deg_symbol}F / #{temp_c} #{deg_symbol}C"
     end
-
+    
     def wind
       read_attr(current_conditions, 'wind_condition')
     end

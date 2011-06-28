@@ -12,6 +12,8 @@ module Thundersnow
 
       if show_forecast?
         show :forecast
+      elsif show_forecasteu?
+        show :forecasteu
       else
         show :current
       end
@@ -30,6 +32,10 @@ module Thundersnow
     def show_forecast?
       @args.include? '--forecast'
     end
-
+    
+    def show_forecasteu?
+      @args.include? '--forecasteu'
+    end
+    
   end
 end
